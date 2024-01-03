@@ -1,5 +1,6 @@
 import { SafeAreaView, StatusBar, StyleSheet, Text, View } from 'react-native';
 import Header from './components/Header';
+import JokeConfigurator from './components/JokeConfigurator';
 
 export default function App() {
   return (
@@ -7,9 +8,8 @@ export default function App() {
       <StatusBar />
 
       <Header />
+      <JokeConfigurator />
 
-
-      <Text>Hello World</Text>
     </SafeAreaView>
   );
 }
