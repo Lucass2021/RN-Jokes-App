@@ -1,9 +1,14 @@
 import { SafeAreaView, StatusBar, StyleSheet, Text, View } from 'react-native';
+import Header from './components/Header';
 
 export default function App() {
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar />
+
+      <Header />
+
+
       <Text>Hello World</Text>
     </SafeAreaView>
   );
@@ -12,6 +17,6 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'plum',
+    backgroundColor: '#F9EEFF',
   },
 });
