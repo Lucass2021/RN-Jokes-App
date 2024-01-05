@@ -6,10 +6,11 @@ import { useEffect, useState } from 'react';
 
 export default function App() {
   const [apiData, setApiData] = useState(null)
+  const [jokeCategoryParent, setJokeCategoryParent] = useState("")
 
   const handleJokeApiRequest = async () => {
     try {
-      const req = await fetch(`https://v2.jokeapi.dev/joke/Any`);
+      const req = await fetch(`https://v2.jokeapi.dev/joke/${jokeCategoryParent}`);
       const json = await req.json();
       setApiData(json);
       console.log("-Running API");
@@ -20,6 +21,10 @@ export default function App() {
     }
   };
 
+  const handleConfiguratorValueChange = (value) => {
+    setJokeCategoryParent(value);
+  };
+
 
   return (
     <SafeAreaView style={styles.container}>
@@ -28,7 +33,7 @@ export default function App() {
       <Header />
 
       <View style={styles.components}>
-        <JokeConfigurator onPressApi={handleJokeApiRequest} />
+        <JokeConfigurator onPressApi={handleJokeApiRequest} exportJokeCategory={handleConfiguratorValueChange} />
         <SingleJoke apiData={apiData} onPressApi={handleJokeApiRequest} />
       </View>
 

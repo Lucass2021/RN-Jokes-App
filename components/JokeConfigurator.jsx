@@ -2,9 +2,16 @@ import { useState } from 'react';
 import { Button, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import SelectDropdown from 'react-native-select-dropdown'
 
-export default function JokeConfigurator({ onPressApi }) {
+export default function JokeConfigurator({ onPressApi, exportJokeCategory }) {
     const jokeCategories = ["Any", "Programming", "Misc", "Dark", "Pun", "Spooky", "Christmas"]
     const [jokeCategory, setJokeCategory] = useState("")
+
+    const handleCategoryChange = (selectedItem, index) => {
+        setJokeCategory(selectedItem);
+        console.log(selectedItem, index)
+
+        exportJokeCategory(selectedItem); // returning data to the App.jsx
+    };
 
     return (
         <View style={styles.container}>
@@ -16,10 +23,7 @@ export default function JokeConfigurator({ onPressApi }) {
                     buttonTextStyle={{ color: "#fff" }}
                     defaultButtonText="Select Joke Category"
                     data={jokeCategories}
-                    onSelect={(selectedItem, index) => {
-                        setJokeCategory(selectedItem)
-                        console.log(selectedItem, index)
-                    }}
+                    onSelect={handleCategoryChange}
                 />
             </View>
 
