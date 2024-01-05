@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Button, StyleSheet, Text, TextInput, View } from 'react-native';
+import { Button, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import SelectDropdown from 'react-native-select-dropdown'
 
 export default function JokeConfigurator() {
@@ -27,14 +27,16 @@ export default function JokeConfigurator() {
                 <Text style={styles.jokeAmountText}>How many jokes do you want to laugh at?</Text>
                 <TextInput
                     style={styles.jokeAmountInput}
-                    placeholder="Search for a joke from 1 to 1300"
+                    placeholder="Type a number from 1 to 1300"
                     keyboardType="numeric"
                     placeholderTextColor="#301534"
                 />
             </View>
 
             <View style={styles.buttonContainer}>
-                <Button title="Show Jokes" />
+                <TouchableOpacity style={styles.button} activeOpacity={0.7}>
+                    <Text style={styles.buttonText}>Show Jokes</Text>
+                </TouchableOpacity>
             </View>
 
         </View>
@@ -43,7 +45,6 @@ export default function JokeConfigurator() {
 
 const styles = StyleSheet.create({
     container: {
-        marginTop: 50,
     },
     jokeCategoryContainer: {
         marginBottom: 50
@@ -66,7 +67,7 @@ const styles = StyleSheet.create({
         marginBottom: 50
     },
     jokeAmountText: {
-        fontSize: 18,
+        fontSize: 16,
         fontWeight: "bold",
         color: "#301534",
         textAlign: "center",
@@ -87,6 +88,19 @@ const styles = StyleSheet.create({
     },
     buttonContainer: {
 
+    },
+    button: {
+        backgroundColor: '#AB26ED',
+        borderRadius: 5,
+        padding: 10,
+        width: "90%",
+        borderColor: '#ccc',
+        alignSelf: 'center'
+    },
+    buttonText: {
+        color: 'white',
+        textAlign: 'center',
+        fontSize: 20,
     },
 });
 
