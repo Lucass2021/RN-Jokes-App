@@ -1,8 +1,26 @@
 import { SafeAreaView, StatusBar, StyleSheet, View } from 'react-native';
 import Header from './components/Header';
 import JokeConfigurator from './components/JokeConfigurator';
+import SingleJoke from './components/SingleJoke';
+import { useEffect, useState } from 'react';
 
 export default function App() {
+  const [apiData, setApiData] = useState(null)
+
+  const handleJokeApiRequest = async () => {
+    try {
+      const req = await fetch(`https://v2.jokeapi.dev/joke/Any`);
+      const json = await req.json();
+      setApiData(json);
+      console.log("-Running API");
+      console.log("API Response:", json);
+      console.log("Joke Response:", json.setup);
+    } catch (error) {
+      console.error("API Error:", error);
+    }
+  };
+
+
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar />
@@ -10,7 +28,8 @@ export default function App() {
       <Header />
 
       <View style={styles.components}>
-        <JokeConfigurator />
+        <JokeConfigurator onPressApi={handleJokeApiRequest} />
+        <SingleJoke apiData={apiData} onPressApi={handleJokeApiRequest} />
       </View>
 
     </SafeAreaView>
