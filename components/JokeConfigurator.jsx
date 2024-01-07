@@ -31,12 +31,12 @@ export default function JokeConfigurator({ onPressApi, onPressShowJokes, exportJ
                     onSelect={handleCategoryChange}
                 />
                 {!jokeCategory && jokeCategoryError == true &&
-                    <Text>Select an option</Text>
+                    <Text style={styles.errorText}>Select an option</Text>
                 }
 
             </View>
 
-            <Text>Jokecategory Debug: {jokeCategory}</Text>
+            {/* <Text>Jokecategory Debug: {jokeCategory}</Text> */}
 
             <View style={styles.jokeAmountContainer}>
                 <Text style={styles.jokeAmountText}>How many jokes do you want to laugh at?</Text>
@@ -48,12 +48,12 @@ export default function JokeConfigurator({ onPressApi, onPressShowJokes, exportJ
                     value={jokeAmount}
                     onChangeText={(text) => handleJokeAmountChange(text)}
                 />
-                {!(jokeAmount <= 0 || jokeAmount < 10) && jokeAmountError == true &&
-                    <Text>Select a number between 1 to 10</Text>
+                {(jokeAmount <= 0 || jokeAmount < 10) && jokeAmountError == true &&
+                    <Text style={styles.errorText}>Select a number between 1 to 10</Text>
                 }
             </View>
 
-            <Text>Amount Debug: {jokeAmount}</Text>
+            {/* <Text>Amount Debug: {jokeAmount}</Text> */}
 
             <View style={styles.buttonContainer}>
                 <TouchableOpacity style={styles.button} activeOpacity={0.7} onPress={() => { onPressApi(); onPressShowJokes(); }}>
@@ -76,7 +76,8 @@ const styles = StyleSheet.create({
         backgroundColor: '#AB26ED',
         borderColor: '#ccc',
         borderRadius: 5,
-        alignSelf: 'center'
+        alignSelf: 'center',
+        marginBottom: 15,
     },
     jokeAmountContainer: {
         marginBottom: 50
@@ -93,6 +94,7 @@ const styles = StyleSheet.create({
     jokeAmountInput: {
         height: 40,
         margin: 12,
+        marginBottom: 15,
         borderWidth: 1,
         borderRadius: 5,
         backgroundColor: '#fff',
@@ -114,5 +116,10 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         fontSize: 20,
     },
+    errorText: {
+        color: 'red',
+        width: "90%",
+        textAlign: 'center',
+    }
 });
 

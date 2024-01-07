@@ -1,10 +1,3 @@
-// 1 - Fazer a tela antiga sumir e aparecer a nova - ok
-// 2 - Fazer todas as piadas aparecerem na nova tela - ok
-// 2.5 - Fazer apenas 1 piada aprecer na tela ok
-// 3 - Estilizar a nova tela ok
-// 4 - Tratar erros
-// 5 - Adicionar delay e fazer com que o botão resete a aplicação ok
-
 import { SafeAreaView, StatusBar, StyleSheet, View } from 'react-native';
 import Header from './components/Header';
 import JokeConfigurator from './components/JokeConfigurator';
@@ -22,12 +15,14 @@ export default function App() {
   // onPressApi
   const handleJokeApiRequest = async () => {
     try {
-      const req = await fetch(`https://v2.jokeapi.dev/joke/${jokeCategoryParent}?type=twopart&amount=${jokeAmountParent}`);
-      const json = await req.json();
-      setApiData(json);
-      console.log("-Running API");
-      console.log("API Response:", json);
-      console.log("Joke Response:", json.setup);
+      if (jokeCategoryParent.length > 3 || jokeAmountParent > 0) {
+        const req = await fetch(`https://v2.jokeapi.dev/joke/${jokeCategoryParent}?type=twopart&amount=${jokeAmountParent}`);
+        const json = await req.json();
+        setApiData(json);
+        console.log("-Running API");
+        console.log("API Response:", json);
+        console.log("Joke Response:", json.setup);
+      }
     } catch (error) {
       if (jokeCategoryError === true || jokeAmountError === true) {
         console.error("API Error:", error);
