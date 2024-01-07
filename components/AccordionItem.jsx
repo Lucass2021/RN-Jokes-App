@@ -29,6 +29,10 @@ export default AccordionItem = ({ title, content }) => {
 const styles = StyleSheet.create({
     accordionItem: {
         marginBottom: 20,
+        backgroundColor: "#fff",
+        padding: 10,
+        borderColor: '#ccc',
+        borderRadius: 10,
     },
     accordionTitle: {
         fontWeight: 'bold',

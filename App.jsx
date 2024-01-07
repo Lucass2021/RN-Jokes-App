@@ -1,9 +1,9 @@
 // 1 - Fazer a tela antiga sumir e aparecer a nova - ok
 // 2 - Fazer todas as piadas aparecerem na nova tela - ok
-// 2.5 - Fazer apenas 1 piada aprecer na tela
-// 3 - Estilizar a nova tela
+// 2.5 - Fazer apenas 1 piada aprecer na tela ok
+// 3 - Estilizar a nova tela ok
 // 4 - Tratar erros
-// 5 - Adicionar delay e fazer com que o botão resete a aplicação
+// 5 - Adicionar delay e fazer com que o botão resete a aplicação 
 
 import { SafeAreaView, StatusBar, StyleSheet, View } from 'react-native';
 import Header from './components/Header';
@@ -32,7 +32,7 @@ export default function App() {
   };
 
   // onPressShowJokes
-  const handleButtonPress = () => {
+  const handleShowJokesButton = () => {
     setShowJokes(false)
   }
 
@@ -46,6 +46,12 @@ export default function App() {
     setJokeAmountParent(value);
   };
 
+  const handleResetForm = () => {
+    setJokeCategoryParent(""); // Reset Joke category
+    setJokeAmountParent(""); // Reset Joke amount
+    setShowJokes(true) // Return to home
+  }
+
 
   return (
     <SafeAreaView style={styles.container}>
@@ -57,14 +63,18 @@ export default function App() {
         {showJokes &&
           <JokeConfigurator
             onPressApi={handleJokeApiRequest}
-            onPressShowJokes={handleButtonPress}
+            onPressShowJokes={handleShowJokesButton}
             exportJokeCategory={handleCategoryValueChange}
             exportJokeAmount={handleAmountValueChange}
           />
         }
 
         {!showJokes &&
-          <SingleJoke apiData={apiData} onPressApi={handleJokeApiRequest} />
+          <SingleJoke
+            apiData={apiData}
+            onPressApi={handleJokeApiRequest}
+            onPressResetApp={handleResetForm}
+          />
         }
       </View>
 

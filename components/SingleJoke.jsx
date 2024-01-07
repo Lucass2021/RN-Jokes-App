@@ -1,25 +1,17 @@
 import { ActivityIndicator, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import AccordionItem from './AccordionItem';
+import { useState } from 'react';
 
-export default SingleJoke = ({ apiData }) => {
+export default SingleJoke = ({ apiData, onPressResetApp }) => {
+    const [timeJokeButton, setTimeJokeButton] = useState(false)
+
+    setTimeout(() => {
+        setTimeJokeButton(true)
+    }, 5000);
+
+
     return (
         <>
-            {/* <View style={styles.container}>
-
-                {apiData && typeof apiData === 'object' && !apiData.amount ? (
-                    <>
-                        <AccordionItem title={apiData.setup} content={apiData.delivery} />
-                    </>
-                ) : <ActivityIndicator size="extra-large" color="#AB26ED" />
-                }
-
-                {apiData && apiData.jokes && apiData
-                    ? (apiData.jokes.map((joke, index) => (<AccordionItem key={index} title={joke.setup} content={joke.delivery} />)))
-                    : (<ActivityIndicator size="extra-large" color="#AB26ED" />
-
-                    )}
-            </View> */}
-
             <View style={styles.container}>
                 {apiData && typeof apiData === 'object' && !apiData.amount ? (
                     <AccordionItem title={apiData.setup} content={apiData.delivery} />
@@ -32,21 +24,18 @@ export default SingleJoke = ({ apiData }) => {
                 )}
             </View>
 
-
-            <TouchableOpacity style={styles.button} activeOpacity={0.7} onPress={() => { }}>
-                <Text style={styles.buttonText}>See more Jokes</Text>
-            </TouchableOpacity>
+            {timeJokeButton &&
+                <TouchableOpacity style={styles.button} activeOpacity={0.7} onPress={() => { onPressResetApp() }}>
+                    <Text style={styles.buttonText}>See more Jokes</Text>
+                </TouchableOpacity>
+            }
         </>
     );
 };
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: '#FFFFFF',
-        padding: 20,
         width: "90%",
-        borderColor: '#ccc',
-        borderRadius: 10,
         alignSelf: 'center',
         marginBottom: 50
     },
