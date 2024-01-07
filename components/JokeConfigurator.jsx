@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import SelectDropdown from 'react-native-select-dropdown'
 
-export default function JokeConfigurator({ onPressApi, onPressShowJokes, exportJokeCategory, exportJokeAmount }) {
+export default function JokeConfigurator({ onPressApi, onPressShowJokes, exportJokeCategory, exportJokeAmount, jokeCategoryError, jokeAmountError }) {
     const jokeCategories = ["Any", "Programming", "Misc", "Dark", "Pun", "Spooky", "Christmas"]
     const [jokeCategory, setJokeCategory] = useState("")
     const [jokeAmount, setJokeAmount] = useState("")
@@ -30,6 +30,10 @@ export default function JokeConfigurator({ onPressApi, onPressShowJokes, exportJ
                     data={jokeCategories}
                     onSelect={handleCategoryChange}
                 />
+                {!jokeCategory && jokeCategoryError == true &&
+                    <Text>Select an option</Text>
+                }
+
             </View>
 
             <Text>Jokecategory Debug: {jokeCategory}</Text>
@@ -44,6 +48,9 @@ export default function JokeConfigurator({ onPressApi, onPressShowJokes, exportJ
                     value={jokeAmount}
                     onChangeText={(text) => handleJokeAmountChange(text)}
                 />
+                {!(jokeAmount <= 0 || jokeAmount < 10) && jokeAmountError == true &&
+                    <Text>Select a number between 1 to 10</Text>
+                }
             </View>
 
             <Text>Amount Debug: {jokeAmount}</Text>

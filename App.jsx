@@ -14,8 +14,10 @@ import { useState } from 'react';
 export default function App() {
   const [apiData, setApiData] = useState(null)
   const [jokeCategoryParent, setJokeCategoryParent] = useState("")
-  const [jokeAmountParent, setJokeAmountParent] = useState("")
+  const [jokeAmountParent, setJokeAmountParent] = useState(0)
   const [showJokes, setShowJokes] = useState(true)
+  const [jokeCategoryError, setJokeCategoryError] = useState(false)
+  const [jokeAmountError, setJokeAmountError] = useState(false)
 
   // onPressApi
   const handleJokeApiRequest = async () => {
@@ -27,14 +29,36 @@ export default function App() {
       console.log("API Response:", json);
       console.log("Joke Response:", json.setup);
     } catch (error) {
-      console.error("API Error:", error);
+      if (jokeCategoryError === true || jokeAmountError === true) {
+        console.error("API Error:", error);
+      }
     }
   };
 
   // onPressShowJokes
   const handleShowJokesButton = () => {
+
     setApiData("") // Clean previously api data
-    setShowJokes(false)
+    setShowJokes(false) // Change screen
+
+    // Generate error message
+    if (jokeCategoryParent === '') {
+      setJokeCategoryError(true)
+      setApiData("") // Clean previously api data
+      setShowJokes(true) // Prevent Screen change
+    }
+
+    // Generate error message
+    if (jokeAmountParent <= 0 || jokeAmountParent > 10) {
+      setJokeAmountError(true)
+      setApiData("") // Clean previously api data
+      setShowJokes(true) // Prevent Screen change
+    }
+
+    if (jokeCategoryParent !== '' && jokeAmountParent > 0 && jokeAmountParent <= 10) {
+      setJokeCategoryError(false) // Reset error status
+      setJokeAmountError(false) // Reset error status
+    }
   }
 
   // exportJokeCategory
@@ -67,6 +91,8 @@ export default function App() {
             onPressShowJokes={handleShowJokesButton}
             exportJokeCategory={handleCategoryValueChange}
             exportJokeAmount={handleAmountValueChange}
+            jokeCategoryError={jokeCategoryError}
+            jokeAmountError={jokeAmountError}
           />
         }
 
