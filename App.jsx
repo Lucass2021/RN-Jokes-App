@@ -3,7 +3,7 @@
 // 2.5 - Fazer apenas 1 piada aprecer na tela ok
 // 3 - Estilizar a nova tela ok
 // 4 - Tratar erros
-// 5 - Adicionar delay e fazer com que o botão resete a aplicação 
+// 5 - Adicionar delay e fazer com que o botão resete a aplicação ok
 
 import { SafeAreaView, StatusBar, StyleSheet, View } from 'react-native';
 import Header from './components/Header';
@@ -33,6 +33,7 @@ export default function App() {
 
   // onPressShowJokes
   const handleShowJokesButton = () => {
+    setApiData("") // Clean previously api data
     setShowJokes(false)
   }
 
