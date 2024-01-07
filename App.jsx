@@ -1,3 +1,10 @@
+// 1 - Fazer a tela antiga sumir e aparecer a nova - ok
+// 2 - Fazer todas as piadas aparecerem na nova tela - ok
+// 2.5 - Fazer apenas 1 piada aprecer na tela
+// 3 - Estilizar a nova tela
+// 4 - Tratar erros
+// 5 - Adicionar delay e fazer com que o botão resete a aplicação
+
 import { SafeAreaView, StatusBar, StyleSheet, View } from 'react-native';
 import Header from './components/Header';
 import JokeConfigurator from './components/JokeConfigurator';
