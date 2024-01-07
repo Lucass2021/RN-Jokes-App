@@ -8,7 +8,9 @@ export default function App() {
   const [apiData, setApiData] = useState(null)
   const [jokeCategoryParent, setJokeCategoryParent] = useState("")
   const [jokeAmountParent, setJokeAmountParent] = useState("")
+  const [showJokes, setShowJokes] = useState(true)
 
+  // onPressApi
   const handleJokeApiRequest = async () => {
     try {
       const req = await fetch(`https://v2.jokeapi.dev/joke/${jokeCategoryParent}?type=twopart&amount=${jokeAmountParent}`);
@@ -22,10 +24,17 @@ export default function App() {
     }
   };
 
+  // onPressShowJokes
+  const handleButtonPress = () => {
+    setShowJokes(false)
+  }
+
+  // exportJokeCategory
   const handleCategoryValueChange = (value) => {
     setJokeCategoryParent(value);
   };
 
+  // exportJokeAmount
   const handleAmountValueChange = (value) => {
     setJokeAmountParent(value);
   };
@@ -38,12 +47,18 @@ export default function App() {
       <Header />
 
       <View style={styles.components}>
-        <JokeConfigurator
-          onPressApi={handleJokeApiRequest}
-          exportJokeCategory={handleCategoryValueChange}
-          exportJokeAmount={handleAmountValueChange}
-        />
-        <SingleJoke apiData={apiData} onPressApi={handleJokeApiRequest} />
+        {showJokes &&
+          <JokeConfigurator
+            onPressApi={handleJokeApiRequest}
+            onPressShowJokes={handleButtonPress}
+            exportJokeCategory={handleCategoryValueChange}
+            exportJokeAmount={handleAmountValueChange}
+          />
+        }
+
+        {!showJokes &&
+          <SingleJoke apiData={apiData} onPressApi={handleJokeApiRequest} />
+        }
       </View>
 
     </SafeAreaView>

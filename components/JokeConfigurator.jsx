@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Button, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import SelectDropdown from 'react-native-select-dropdown'
 
-export default function JokeConfigurator({ onPressApi, exportJokeCategory, exportJokeAmount }) {
+export default function JokeConfigurator({ onPressApi, onPressShowJokes, exportJokeCategory, exportJokeAmount }) {
     const jokeCategories = ["Any", "Programming", "Misc", "Dark", "Pun", "Spooky", "Christmas"]
     const [jokeCategory, setJokeCategory] = useState("")
     const [jokeAmount, setJokeAmount] = useState("")
@@ -49,7 +49,7 @@ export default function JokeConfigurator({ onPressApi, exportJokeCategory, expor
             <Text>Amount Debug: {jokeAmount}</Text>
 
             <View style={styles.buttonContainer}>
-                <TouchableOpacity style={styles.button} activeOpacity={0.7} onPress={onPressApi}>
+                <TouchableOpacity style={styles.button} activeOpacity={0.7} onPress={() => { onPressApi(); onPressShowJokes(); }}>
                     <Text style={styles.buttonText}>Show Jokes</Text>
                 </TouchableOpacity>
             </View>
