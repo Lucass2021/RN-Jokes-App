@@ -2,7 +2,7 @@ import { SafeAreaView, StatusBar, StyleSheet, View } from 'react-native';
 import Header from './components/Header';
 import JokeConfigurator from './components/JokeConfigurator';
 import SingleJoke from './components/SingleJoke';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 export default function App() {
   const [apiData, setApiData] = useState(null)
