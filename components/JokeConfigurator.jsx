@@ -2,9 +2,10 @@ import { useState } from 'react';
 import { Button, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import SelectDropdown from 'react-native-select-dropdown'
 
-export default function JokeConfigurator({ onPressApi, exportJokeCategory }) {
+export default function JokeConfigurator({ onPressApi, exportJokeCategory, exportJokeAmount }) {
     const jokeCategories = ["Any", "Programming", "Misc", "Dark", "Pun", "Spooky", "Christmas"]
     const [jokeCategory, setJokeCategory] = useState("")
+    const [jokeAmount, setJokeAmount] = useState("")
 
     const handleCategoryChange = (selectedItem, index) => {
         setJokeCategory(selectedItem);
@@ -13,11 +14,15 @@ export default function JokeConfigurator({ onPressApi, exportJokeCategory }) {
         exportJokeCategory(selectedItem); // returning data to the App.jsx
     };
 
+    const handleJokeAmountChange = (inputAmount) => {
+        setJokeAmount(inputAmount)
+        exportJokeAmount(inputAmount)
+    }
+
     return (
         <View style={styles.container}>
 
             <View style={styles.jokeCategoryContainer}>
-                {/* <Text style={styles.jokeCategoryText}>Choose Joke Category</Text> */}
                 <SelectDropdown
                     buttonStyle={styles.jokeCategorySelectDropdown}
                     buttonTextStyle={{ color: "#fff" }}
@@ -27,6 +32,8 @@ export default function JokeConfigurator({ onPressApi, exportJokeCategory }) {
                 />
             </View>
 
+            <Text>Jokecategory Debug: {jokeCategory}</Text>
+
             <View style={styles.jokeAmountContainer}>
                 <Text style={styles.jokeAmountText}>How many jokes do you want to laugh at?</Text>
                 <TextInput
@@ -34,8 +41,12 @@ export default function JokeConfigurator({ onPressApi, exportJokeCategory }) {
                     placeholder="Type a number from 1 to 10"
                     keyboardType="numeric"
                     placeholderTextColor="#301534"
+                    value={jokeAmount}
+                    onChangeText={(text) => handleJokeAmountChange(text)}
                 />
             </View>
+
+            <Text>Amount Debug: {jokeAmount}</Text>
 
             <View style={styles.buttonContainer}>
                 <TouchableOpacity style={styles.button} activeOpacity={0.7} onPress={onPressApi}>
@@ -53,13 +64,6 @@ const styles = StyleSheet.create({
     jokeCategoryContainer: {
         marginBottom: 50
     },
-    // jokeCategoryText: {
-    //     fontSize: 18,
-    //     fontWeight: "bold",
-    //     color: "#301534",
-    //     textAlign: "center",
-    //     marginBottom: 10
-    // },
     jokeCategorySelectDropdown: {
         width: "90%",
         backgroundColor: '#AB26ED',
@@ -89,9 +93,6 @@ const styles = StyleSheet.create({
         padding: 10,
         width: "90%",
         alignSelf: 'center'
-    },
-    buttonContainer: {
-
     },
     button: {
         backgroundColor: '#AB26ED',

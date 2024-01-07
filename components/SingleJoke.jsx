@@ -23,3 +23,7 @@ const styles = StyleSheet.create({
 
     },
 });
+
+// 1 - Fazer a tela antiga sumir e aparecer a nova
+// 2 - Fazer todas as piadas aparecerem na nova tela
+// 3 - Estilizar a nova tela
