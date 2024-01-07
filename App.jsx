@@ -112,7 +112,8 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
   },
   components: {
+    marginTop: 20,
     flex: 1,
-    justifyContent: 'center',
+    // justifyContent: 'center',
   },
 });

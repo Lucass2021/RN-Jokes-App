@@ -1,4 +1,4 @@
-import { ActivityIndicator, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { ActivityIndicator, SectionList, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import AccordionItem from './AccordionItem';
 import { useState } from 'react';
 
@@ -12,7 +12,7 @@ export default SingleJoke = ({ apiData, onPressResetApp }) => {
 
     return (
         <>
-            <View style={styles.container}>
+            {/* <View style={styles.container}>
                 {apiData && typeof apiData === 'object' && !apiData.amount ? (
                     <AccordionItem title={apiData.setup} content={apiData.delivery} />
                 ) : apiData && apiData.jokes && Array.isArray(apiData.jokes) && apiData.jokes.length > 0 ? (
@@ -22,13 +22,34 @@ export default SingleJoke = ({ apiData, onPressResetApp }) => {
                 ) : (
                     <ActivityIndicator size="extra-large" color="#AB26ED" />
                 )}
+            </View> */}
+            <View style={styles.container}>
+                {apiData && typeof apiData === 'object' && !apiData.amount ? (
+                    <AccordionItem title={apiData.setup} content={apiData.delivery} />
+                ) : apiData && apiData.jokes && Array.isArray(apiData.jokes) && apiData.jokes.length > 0 ? (
+                    <SectionList
+                        sections={[
+                            {
+                                title: 'Jokes',
+                                data: Object.values(apiData.jokes), // Converta o objeto para um array de valores
+                            }
+                        ]}
+                        keyExtractor={(item, index) => item + index}
+                        renderItem={({ item }) => (
+                            <AccordionItem title={item.setup} content={item.delivery} />
+                        )}
+                    />
+                ) : (
+                    <ActivityIndicator size="extra-large" color="#AB26ED" />
+                )}
+                {timeJokeButton &&
+                    <TouchableOpacity style={styles.button} activeOpacity={0.7} onPress={() => { onPressResetApp() }}>
+                        <Text style={styles.buttonText}>See more Jokes</Text>
+                    </TouchableOpacity>
+                }
             </View>
 
-            {timeJokeButton &&
-                <TouchableOpacity style={styles.button} activeOpacity={0.7} onPress={() => { onPressResetApp() }}>
-                    <Text style={styles.buttonText}>See more Jokes</Text>
-                </TouchableOpacity>
-            }
+
         </>
     );
 };

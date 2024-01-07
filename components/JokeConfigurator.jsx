@@ -67,6 +67,8 @@ export default function JokeConfigurator({ onPressApi, onPressShowJokes, exportJ
 
 const styles = StyleSheet.create({
     container: {
+        // flex: 1,
+        // justifyContent: 'center',
     },
     jokeCategoryContainer: {
         marginBottom: 50

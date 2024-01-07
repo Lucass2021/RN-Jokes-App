@@ -11,7 +11,7 @@ export default function Header() {
 
 const styles = StyleSheet.create({
     container: {
-        marginTop: 50,
+        marginTop: 30,
         alignItems: 'center',
         justifyContent: 'center',
         flexDirection: 'row',
